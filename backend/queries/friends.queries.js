@@ -81,7 +81,7 @@ const getAllFriends = async (user_id) => {
 const removeFriend = async (user_id, friend_id) => {
     try {
         const removedFriend = await db.one(
-            "DELETE FROM friends WHERE (user_id = $1 AND friend_id = $2) RETURNING *",
+            "DELETE FROM friends WHERE (user_id = $2 AND friend_id = $1 OR user_id = $1 AND friend_id = $2) RETURNING *",
             [user_id, friend_id]
         );
         return removedFriend;

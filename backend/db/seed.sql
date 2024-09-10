@@ -1,29 +1,27 @@
 \c ausome_dev;
 
--- Insert users with funny puns on their names
-INSERT INTO users (email, username, password_hash, profile_picture, bio) VALUES
-('punnyuser1@example.com', 'Olive Yew', 'password123', 'profile1.png', 'I love you!'),
-('punnyuser2@example.com', 'Anita Bath', 'password123', 'profile2.png', 'I need a bath.'),
-('punnyuser3@example.com', 'Chris P. Bacon', 'password123', 'profile3.png', 'Crispy bacon, anyone?'),
-('punnyuser4@example.com', 'Lois Carmen Denominator', 'password123', 'profile4.png', 'Math is life.'),
-('punnyuser5@example.com', 'Paige Turner', 'password123', 'profile5.png', 'I flip through life.'),
-('punnyuser6@example.com', 'Sue Yu', 'password123', 'profile6.png', 'I’m always ready for court.'),
-('punnyuser7@example.com', 'Marge Innovera', 'password123', 'profile7.png', 'Change is inevitable.'),
-('punnyuser8@example.com', 'Al Beback', 'password123', 'profile8.png', 'I’ll be back.'),
-('punnyuser9@example.com', 'Rick O’Shea', 'password123', 'profile9.png', 'I bounce back quickly.'),
-('punnyuser10@example.com', 'Dustin T. Wind', 'password123', 'profile10.png', 'Gone with the wind.'),
-('punnyuser11@example.com', 'Barb Dwyer', 'password123', 'profile11.png', 'Watch out, I’m sharp.'),
-('punnyuser12@example.com', 'Harry Shins', 'password123', 'profile12.png', 'I’m a hairy situation.'),
-('punnyuser13@example.com', 'Justin Case', 'password123', 'profile13.png', 'Just in case, I’m here.'),
-('punnyuser14@example.com', 'Sue Flay', 'password123', 'profile14.png', 'I’m the master of all dishes.'),
-('punnyuser15@example.com', 'Tim Burr', 'password123', 'profile15.png', 'I’m falling for you.'),
-('punnyuser16@example.com', 'Sal Monella', 'password123', 'profile16.png', 'I’m dangerous if undercooked.'),
-('punnyuser17@example.com', 'Eileen Dover', 'password123', 'profile17.png', 'I bend but don’t break.'),
-('punnyuser18@example.com', 'Don Keigh', 'password123', 'profile18.png', 'I do the heavy lifting.'),
-('punnyuser19@example.com', 'Gene Poole', 'password123', 'profile19.png', 'I’m where life begins.'),
-('punnyuser20@example.com', 'Warren Peace', 'password123', 'profile20.png', 'I’m always at peace.');
+INSERT INTO users (username, email, password_hash, profile_picture, bio, first_name, last_name) VALUES
+('john_doe', 'john@example.com', 'password123', 'profile1.jpg', 'Bio for John Doe', 'John', 'Doe'),
+('jane_doe', 'jane@example.com', 'password123', 'profile2.jpg', 'Bio for Jane Doe', 'Jane', 'Doe'),
+('pun_isher', 'punisher@example.com', 'password123', 'profile3.jpg', 'Bio for Punisher', 'Pun', 'Isher'),
+('sandy_claws', 'sandy@example.com', 'password123', 'profile4.jpg', 'Bio for Sandy Claws', 'Sandy', 'Claws'),
+('hugh_jass', 'hugh@example.com', 'password123', 'profile5.jpg', 'Bio for Hugh Jass', 'Hugh', 'Jass'),
+('al_bundy', 'al@example.com', 'password123', 'profile6.jpg', 'Bio for Al Bundy', 'Al', 'Bundy'),
+('manny_kind', 'manny@example.com', 'password123', 'profile7.jpg', 'Bio for Manny Kind', 'Manny', 'Kind'),
+('oliver_closoff', 'oliver@example.com', 'password123', 'profile8.jpg', 'Bio for Oliver Closoff', 'Oliver', 'Closoff'),
+('ivana_tinkle', 'ivana@example.com', 'password123', 'profile9.jpg', 'Bio for Ivana Tinkle', 'Ivana', 'Tinkle'),
+('neil_down', 'neil@example.com', 'password123', 'profile10.jpg', 'Bio for Neil Down', 'Neil', 'Down'),
+('justin_case', 'justin@example.com', 'password123', 'profile11.jpg', 'Bio for Justin Case', 'Justin', 'Case'),
+('sue_preme', 'sue@example.com', 'password123', 'profile12.jpg', 'Bio for Sue Preme', 'Sue', 'Preme'),
+('pete_zaria', 'pete@example.com', 'password123', 'profile13.jpg', 'Bio for Pete Zaria', 'Pete', 'Zaria'),
+('ray_sun', 'ray@example.com', 'password123', 'profile14.jpg', 'Bio for Ray Sun', 'Ray', 'Sun'),
+('chuck_wood', 'chuck@example.com', 'password123', 'profile15.jpg', 'Bio for Chuck Wood', 'Chuck', 'Wood'),
+('chris_p_bacon', 'chris@example.com', 'password123', 'profile16.jpg', 'Bio for Chris P. Bacon', 'Chris', 'Bacon'),
+('barry_cade', 'barry@example.com', 'password123', 'profile17.jpg', 'Bio for Barry Cade', 'Barry', 'Cade'),
+('brock_lee', 'brock@example.com', 'password123', 'profile18.jpg', 'Bio for Brock Lee', 'Brock', 'Lee'),
+('april_may', 'april@example.com', 'password123', 'profile19.jpg', 'Bio for April May', 'April', 'May'),
+('bill_board', 'bill@example.com', 'password123', 'profile20.jpg', 'Bio for Bill Board', 'Bill', 'Board');
 
--- Insert posts for the users
 INSERT INTO posts (user_id, content) VALUES
 (1, 'Olive you all so much!'),
 (2, 'Feeling like I really need a bath today.'),
@@ -46,7 +44,6 @@ INSERT INTO posts (user_id, content) VALUES
 (19, 'Swimming in the gene pool of life.'),
 (20, 'Peace out, everyone.');
 
--- Insert likes on various posts
 INSERT INTO likes (user_id, post_id) VALUES
 (2, 1), (3, 1), (4, 2),
 (5, 2), (6, 3), (7, 3),
@@ -57,9 +54,13 @@ INSERT INTO likes (user_id, post_id) VALUES
 (20, 10), (1, 10), (3, 11),
 (5, 12), (7, 13), (9, 14),
 (11, 15), (13, 16), (15, 17),
-(17, 18), (19, 19), (2, 20);
+(17, 18), (19, 19), (2, 20),
+(1, 4), (2, 5), (3, 6), (4, 7),
+(5, 8), (6, 9), (7, 10), (8, 1),
+(9, 2), (10, 3), (1, 6), (2, 7),
+(3, 8), (4, 9), (5, 10), (6, 1),
+(7, 2), (8, 3), (9, 4), (10, 5);
 
--- Insert comments on various posts
 INSERT INTO comments (user_id, post_id, content) VALUES
 (2, 1, 'Olive this post!'),
 (3, 1, 'So much love here!'),
@@ -92,7 +93,6 @@ INSERT INTO comments (user_id, post_id, content) VALUES
 (19, 19, 'Swimming in the gene pool!'),
 (2, 20, 'Peace out everyone.');
 
--- Insert friends relationships
 INSERT INTO friends (user_id, friend_id, status) VALUES
 (1, 2, 'accepted'), (1, 3, 'accepted'), (1, 4, 'pending'),
 (2, 5, 'accepted'), (2, 6, 'pending'), (3, 7, 'accepted'),

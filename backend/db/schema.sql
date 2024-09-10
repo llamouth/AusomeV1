@@ -9,10 +9,10 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
-    profile_picture TEXT,
+    profile_picture VARCHAR(255),
     bio TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS friends (
@@ -46,4 +46,12 @@ CREATE TABLE IF NOT EXISTS likes (
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS resources (
+    id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL,
+    category VARCHAR(255),
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE, 
+    description VARCHAR(255)
 );

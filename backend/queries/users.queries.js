@@ -33,11 +33,11 @@ const updateUser = async (id, user) => {
 
 const createUser = async (user) => {
     try {
-        const { username, email, password_hash, profile_picture, bio } = user
+        const { username, email, password_hash, profile_picture, bio, first_name, last_name } = user
 
         const salt = 10
         const hash = await bcrypt.hash(password_hash, salt)
-        const newUser = await db.one("INSERT INTO users (email, username,password_hash, profile_picture, bio) VALUES($1, $2, $3, $4, $5) RETURNING *", [email, username, hash, profile_picture, bio])
+        const newUser = await db.one("INSERT INTO users (email, username, password_hash, profile_picture, bio, first_name, last_name) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *", [email, username, hash, profile_picture, bio, first_name, last_name])
         return newUser
     } catch (err) {
         return err
@@ -52,6 +52,7 @@ const loginUser = async (user) => {
         }
 
         const passwordMatch = await bcrypt.compare(user.password_hash, loggedInUser.password_hash)
+
         if(!passwordMatch){
             return false
         }

@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import url(https://fonts.googleapis.com/css?family=Sedan:regular,italic); */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+  background: #E4E4E4;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Sedan", sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100vw;
+  box-sizing: border-box;
+  background: #E4E4E4;
+}
+
+@media (max-width: 768px) {
+  body {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  #root {
+    align-items: flex-start;
+  }
+}
