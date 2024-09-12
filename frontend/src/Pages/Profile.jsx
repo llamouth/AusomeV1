@@ -4,7 +4,7 @@ import ProfilePic from "../assets/default-profile.jpg";
 import { useParams } from 'react-router-dom';
 
 // COMPONENTS
-import FriendsList from '../Components/Profile/FriendsList';
+import FriendsList from '../Components/Profile/Friends/FriendsList';
 import Posts from '../Components/Profile/Posts';
 
 const Profile = () => {
@@ -12,8 +12,10 @@ const Profile = () => {
     const { id } = useParams();
     const API = import.meta.env.VITE_BASE_URL;
     const token = localStorage.getItem('token');
+    const userLoggedIn = localStorage.getItem('user_id')
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
+    const [friend, setFriend] = useState(false)
 
     useEffect(() => {
         fetch(`${API}/users/${id}`)
@@ -34,36 +36,40 @@ const Profile = () => {
         });
     }, [id]);
 
+    useEffect(() => {
+        // if(userLoggedIn)
+    }, [id])
+
     return (
-        <Container fluid className="h-full p-4 ">
+        <Container fluid className="h-full p-4">
             <Row className="h-full">
                 {/* Left Sidebar */}
-                <Col md={3} className="d-flex flex-column mb-4">
+                <Col md={3} className="d-flex flex-column space-y-4">
                     {/* Profile Picture */}
-                    <Card className="shadow-lg rounded-lg mb-4 flex-grow-0 bg-white text-white">
+                    <Card className="shadow-lg rounded-lg mb-4 bg-white">
                         <Card.Img variant="top" src={ProfilePic} alt="Profile Picture" />
                         <Card.Body>
-                            <Card.Title className="text-center text-gray-500">{user.first_name} {user.last_name}</Card.Title>
+                            <Card.Title className="text-center text-gray-800">{user.first_name} {user.last_name}</Card.Title>
                         </Card.Body>
                     </Card>
 
                     {/* Friends List Section */}
-                    <Card className="shadow-lg rounded-lg flex-grow-0 bg-white text-gray-500">
+                    <Card className="shadow-lg rounded-lg bg-white">
                         <Card.Body>
-                            <Card.Title className="text-center">Friends List</Card.Title>
+                            <Card.Title className=" text-gray-800">Friends List</Card.Title>
                             <FriendsList />
                         </Card.Body>
                     </Card>
                 </Col>
 
                 {/* Center Feed */}
-                <Col md={9} className="d-flex flex-column mb-4 w-4/6">
-                    <Card className="shadow-lg rounded-lg flex-grow-1 bg-white text-gray-500">
+                <Col md={9} className="d-flex flex-column space-y-4">
+                    <Card className="shadow-lg rounded-lg bg-white flex-grow-1">
                         <Card.Body className="d-flex flex-column h-100">
                             <h5 className="text-center text-xl font-bold mb-4">User's Posts</h5>
-                            {posts.map(post => {
-                                return <Posts post={post} key={post.id}/>
-                            })}
+                            {posts.map(post => (
+                                <Posts post={post} key={post.id} />
+                            ))}
                         </Card.Body>
                     </Card>
                 </Col>

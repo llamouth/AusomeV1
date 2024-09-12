@@ -30,16 +30,8 @@ const DeletePost = ({ setDeletePost, user_id, postId, setAllPosts, setRun }) => 
                 <h2 className="text-lg font-semibold mb-4">Confirm Deletion</h2>
                 <p className="mb-6">Are you sure you want to delete this post?</p>
                 <div className="flex justify-around">
-                    <Button 
-                        variant="danger" 
-                        onClick={handleDelete}>
-                        Confirm
-                    </Button>
-                    <Button 
-                        variant="secondary" 
-                        onClick={() => setDeletePost(false)}>
-                        Cancel
-                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>Confirm</Button>
+                    <Button variant="secondary"  onClick={() => setDeletePost(false)}>Cancel</Button>
                 </div>
             </div>
         </>

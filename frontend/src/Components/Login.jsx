@@ -36,8 +36,9 @@ const Login = () => {
             if (res?.error) {
                 console.error(res);
             } else {
+                console.log(res)
                 localStorage.setItem('token', res.token);
-                localStorage.setItem('user_id', JSON.stringify(res.user.id));
+                localStorage.setItem('user_id', res.user.id);
                 navigate(`/${res.user.id}/feed`);
             }
         })

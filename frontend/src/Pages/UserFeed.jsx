@@ -9,7 +9,7 @@ import FourZeroFour from '../Components/404/FourOFour';
 
 const UserFeed = () => {
     const { id } = useParams(); 
-    const user = JSON.parse(localStorage.getItem('user_id'));
+    const user = localStorage.getItem('user_id');
     const [allPosts, setAllPosts] = useState([]);
 
     if(id != user) {

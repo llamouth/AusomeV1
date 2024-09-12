@@ -7,7 +7,8 @@ const { localStorage } = window
 const NavBar = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
-    const user = JSON.parse(localStorage.getItem('user_id'));
+    const user = localStorage.getItem('user_id');
+    
 
     const handleClick = () => { 
         if(token) {

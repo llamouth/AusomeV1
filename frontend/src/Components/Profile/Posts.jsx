@@ -105,7 +105,7 @@ const Posts = ({ post, setAllPosts, setRun }) => {
             }
             <Card className="mb-4 shadow-sm bg-white border-gray-300 ">
                 <Card.Body className="p-4 relative">
-                    {user_id === +id && (
+                    {user_id == userLoggedIn && (
                         <Button variant="link" className="position-absolute top-0 end-0 text-border" onClick={() => setDeletePost(true)}>
                             <FaTimes size={20} />
                         </Button>
@@ -125,10 +125,10 @@ const Posts = ({ post, setAllPosts, setRun }) => {
                     )}
                 </Card.Body>
                 <Card.Footer className=" border-t border-gray-200 flex justify-around items-center">
-                    <Button variant="link" onClick={handleLike} className={`flex items-center no-underline ${likedPost ? 'text-gray-300' : 'text-gray-500 hover:text-gray-300'}`}>
+                    <Button variant="link" onClick={handleLike} className={`flex items-center no-underline ${likedPost && 'text-blue-700 '}`}>
                         <FaThumbsUp className="mr-2" /> {likes.length}
                     </Button>
-                    <Button variant="link" className="text-gray-500 hover:text-gray-300 flex items-center no-underline" onClick={() => setShowComments(!showComments)}>
+                    <Button variant="link" className=" flex items-center no-underline" onClick={() => setShowComments(!showComments)}>
                         <FaCommentDots className="mr-2" /> {comments.length} Comments
                     </Button>
                     {/* <Button variant="link" className="text-blue-500 hover:text-blue-700 flex items-center no-underline">

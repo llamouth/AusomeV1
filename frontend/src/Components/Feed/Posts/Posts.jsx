@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaTimes, FaThumbsUp, FaCommentDots, FaShareAlt } from 'react-icons/fa';
 import ProfilePic from '../../../assets/default-profile.jpg';
 
@@ -11,6 +11,8 @@ import CommentsContainer from './Comments/CommentsContainer';
 const { localStorage } = window;
 
 const Posts = ({ post, setAllPosts, setRun }) => {
+
+    const navigate = useNavigate()
     const postId = post.id;
     const { id } = useParams(); 
     const newLike = { user_id: id };
@@ -100,10 +102,10 @@ const Posts = ({ post, setAllPosts, setRun }) => {
                             <FaTimes size={20} />
                         </Button>
                     )}
-                    <div className="flex items-center mb-4">
+                    <div className="flex items-center mb-4 hover:cursor-pointer hover:animate-bounce" onClick={() => navigate(`/${user.id}/profile`)}>
                         <img src={ProfilePic} alt={user.username} className="w-10 h-10 rounded-full mr-4" />
-                        <div>
-                            <Card.Title className="mb-0 text-lg font-semibold">
+                        <div className='' >
+                            <Card.Title className="mb-0 text-lg font-semibold" >
                                 {user.first_name} {user.last_name}
                             </Card.Title>
                             <Card.Text className="text-sm text-gray-600">@{user.username}</Card.Text>
