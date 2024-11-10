@@ -64,13 +64,7 @@ const rejectFriendRequest = async (user_id, friend_id) => {
 const getAllFriends = async (user_id) => {
     try {
         const friendsList = await db.any(
-            `SELECT users.id, users.username, users.profile_picture, friends.status 
-             FROM friends 
-             JOIN users 
-             ON (users.id = friends.friend_id AND friends.user_id = $1)
-             OR (users.id = friends.user_id AND friends.friend_id = $1)`,
-            [user_id]
-        );
+            `SELECT friends.user_id AS id, friends.friend_id, users.username, users.profile_picture, friends.status FROM friends JOIN users ON (users.id = friends.friend_id AND friends.user_id = $1) OR (users.id = friends.user_id AND friends.friend_id = $1)`, [user_id]);
         return friendsList;
     } catch (error) {
         return error;

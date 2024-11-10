@@ -96,7 +96,7 @@ const Posts = ({ post, setAllPosts, setRun }) => {
             setComments(res);
         });
         
-    }, [user_id, API]);
+    }, [user_id, API, id]);
 
     return (
         <>

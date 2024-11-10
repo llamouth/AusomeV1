@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Logo from '../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 const { localStorage } = window
 
 const NavBar = () => {
+
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user_id');
+    const pendingAmount = useContext('pendingCount')
+    console.log()
     
-
     const handleClick = () => { 
         if(token) {
             localStorage.removeItem('token');
@@ -20,6 +22,8 @@ const NavBar = () => {
         }
     }
 
+    console.log(pendingAmount)
+
     return (
         <div className="flex justify-between items-center h-16 w-full border-b border-border shadow-navbar px-4">
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
@@ -29,9 +33,8 @@ const NavBar = () => {
             <div className="flex gap-4 items-center">
                 {token && 
                     <>
-                        <Button onClick={() => navigate(`/${user}/feed`)} className="text-text bg-transparent border-0 hover:text-primary transition-colors duration-300"
-                            >Feed
-                        </Button>
+                        <Button onClick={() => navigate(`/${user}/feed`)} className="text-text bg-transparent border-0 hover:text-primary transition-colors duration-300">Feed</Button>
+                        <Button onClick={() => navigate(`/${user}/friend-requests`)} className="text-text bg-transparent border-0 hover:text-primary transition-colors duration-300">Friend Requests</Button>
                     </>
                 }
                 <Button onClick={handleClick} className="text-text bg-transparent border-0 hover:text-danger transition-colors duration-300" >

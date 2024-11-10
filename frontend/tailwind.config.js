@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#C0E8F9',       // Primary color
+        primary: '#51A0F5',       // Primary color
         secondary: '#02243D',     // Secondary color
         background: '#C0E8F9',    // Background color
         text: '#212529',          // Text color
@@ -21,7 +21,10 @@ module.exports = {
         'navbar': '4rem',         // Custom height for navbar
       },
       fontFamily: {
-        sans: ['Lato', 'sans-serif'], // Custom font family
+        sans: ['Lato', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        notosans: ["Noto Sans Warang Citi", 'sans-serif']
+         // Custom font family
       },
       boxShadow: {
         'navbar': '0 4px 6px rgba(0, 0, 0, 0.1)', // Custom shadow for navbar

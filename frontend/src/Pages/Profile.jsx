@@ -15,7 +15,6 @@ const Profile = () => {
     const userLoggedIn = localStorage.getItem('user_id')
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
-    const [friend, setFriend] = useState(false)
 
     useEffect(() => {
         fetch(`${API}/users/${id}`)

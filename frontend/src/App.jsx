@@ -9,6 +9,7 @@ import UserFeed from './pages/UserFeed'
 import SignUpPage from './pages/SignUp'
 import FourZeroFour from './Components/404/FourOFour';
 import Profile from './Pages/Profile';
+import FriendRequest from './Pages/FriendRequest';
 
 // COMPONENTS 
 import NavBar from './components/NavBar'
@@ -25,6 +26,7 @@ function App() {
           <Route path='/signup' element={ <SignUpPage/> }/>
           <Route path='/:id/feed' element={ <UserFeed /> }/>
           <Route path='/:id/profile' element={ <Profile/> }/>
+          <Route path='/:id/friend-requests' element={ <FriendRequest/> }/>
           <Route path='*' element={ <FourZeroFour/> }/>
         </Routes>
       </div>

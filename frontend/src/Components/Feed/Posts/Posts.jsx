@@ -105,7 +105,7 @@ const Posts = ({ post, setAllPosts, setRun }) => {
                     <div className="flex items-center mb-4 hover:cursor-pointer hover:animate-bounce" onClick={() => navigate(`/${user.id}/profile`)}>
                         <img src={ProfilePic} alt={user.username} className="w-10 h-10 rounded-full mr-4" />
                         <div className='' >
-                            <Card.Title className="mb-0 text-lg font-semibold" >
+                            <Card.Title className="mb-0 text-lg font-roboto" >
                                 {user.first_name} {user.last_name}
                             </Card.Title>
                             <Card.Text className="text-sm text-gray-600">@{user.username}</Card.Text>

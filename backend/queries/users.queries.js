@@ -23,10 +23,15 @@ const getSingleUser = async (id) => {
 const updateUser = async (id, user) => {
     try {
         const { username, email, password_hash, profile_picture, bio } = user
-        const salt = 10
-        const hash = await bcrypt.hash(password_hash, salt)
-        const updatedUser = await db.one("UPDATE users SET email=$1, username=$2, password_hash=$3, profile_picture=$4, bio=$5 WHERE id=$6 RETURNING *", [email, username, hash, profile_picture, bio, id])
-        return updatedUser
+        if(!password_hash) {
+            const updatedUser = await db.one("UPDATE users SET email=$1, username=$2, password_hash=$3, profile_picture=$4, bio=$5 WHERE id=$6 RETURNING *", [email, username, password_hash, profile_picture, bio, id])
+            return updatedUser
+        }else {
+            const salt = 10
+            const hash = await bcrypt.hash(password_hash, salt)
+            const updatedUser = await db.one("UPDATE users SET email=$1, username=$2, password_hash=$3, profile_picture=$4, bio=$5 WHERE id=$6 RETURNING *", [email, username, hash, profile_picture, bio, id])
+            return updatedUser
+        }
     } catch (error) {
         return error
     }

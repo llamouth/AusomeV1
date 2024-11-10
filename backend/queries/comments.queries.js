@@ -21,8 +21,9 @@ const createComment = async (post_id, comment) => {
 
 const updateComment = async (post_id, id, comment) => {
     try {
-        const { user_id, content } = comment
-        const commentUpdated = await db.one('UPDATE comments SET user_id=$1, post_id=$2, content=$3 WHERE id=$4 RETURNING *', [user_id, post_id, content, id])
+        const { user_id, content, created_at } = comment
+        const updatedDate = new Date()
+        const commentUpdated = await db.one('UPDATE comments SET user_id=$1, post_id=$2, content=$3, created_at=$6, updated_at=$4 WHERE id=$5 RETURNING *', [user_id, post_id, content, updatedDate, id, created_at])
         return commentUpdated
     } catch (error) {
         return error

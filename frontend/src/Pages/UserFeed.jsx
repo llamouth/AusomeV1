@@ -42,7 +42,7 @@ const UserFeed = () => {
 
                     <Card className="shadow-lg rounded-lg flex-grow-1">
                         <Card.Body className="d-flex flex-column h-100">
-                            <h5 className="text-center text-xl font-bold mb-4">Feed</h5>
+                            <h5 className="text-center text-xl font-bold mb-4 font-roboto">Feed</h5>
                             <div className="flex-1 overflow-auto">
                                 <PostsContainer allPosts={allPosts} setAllPosts={setAllPosts}/>
                             </div>

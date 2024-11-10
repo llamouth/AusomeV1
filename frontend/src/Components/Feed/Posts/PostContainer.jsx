@@ -14,13 +14,14 @@ const PostsContainer = ({allPosts, setAllPosts}) => {
  
     async function fetchPosts() {
         try {
-            const friendsPost = await Promise.all(friends.map((friend) => fetch(`${API}/users/${friend.id}/posts`, {
+            const friendsPost = await Promise.all(friends.map((friend) => fetch(`${API}/users/${friend.id == id ? friend.friend_id : friend.id}/posts`, {
                     headers: {
                         'Authorization': token 
                     }
                 })
                 .then(res => res.json())
                 .then( res => { 
+                    console.log(res)
                     return res
                 })
             ));
@@ -54,7 +55,7 @@ const PostsContainer = ({allPosts, setAllPosts}) => {
         })
         .then(res => res.json())
         .then(res => {
-            setFriends(res);
+            setFriends(res.filter( friend => friend.status == "accepted"));
         })
         .catch(err => console.error(err));
     }, [id, API, token]);
