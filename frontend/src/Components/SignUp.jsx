@@ -49,7 +49,6 @@ const SignUp = () => {
             if (res?.error) {
                 console.error(res);
             } else {
-                console.log(res);
                 localStorage.setItem('token', res.token);
                 localStorage.setItem('user_id', JSON.stringify(res.user.user_id));
                 navigate(`/${res.user.user_id}/feed`);
@@ -109,7 +108,7 @@ const SignUp = () => {
                     </Form.Group>
                     <Form.Group controlId="formPassword" className="relative">
                         <Form.Control
-                            type={showPassword ? "text" : "password"} // Toggle between text and password
+                            type={showPassword ? "text" : "password"} 
                             placeholder="Password"
                             name="password_hash"
                             value={newUser.password_hash}
@@ -118,7 +117,7 @@ const SignUp = () => {
                         />
                         <span
                             className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
-                            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+                            onClick={() => setShowPassword(!showPassword)} 
                         >
                             <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} className='relative bottom-3 text-gray-500'/>
                         </span>

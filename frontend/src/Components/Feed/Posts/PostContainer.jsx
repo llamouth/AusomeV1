@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuid } from 'uuid'
 
 // COMPONENTS
 import Posts from './Posts';
+import { AllContext } from '../../../Context/AllContext';
 
-const PostsContainer = ({allPosts, setAllPosts}) => {
+const PostsContainer = () => {
     const API = import.meta.env.VITE_BASE_URL;
+    const { allPosts, setAllPosts} = useContext(AllContext)
     const { id } = useParams();
     const token = localStorage.getItem('token');
     const [friends, setFriends] = useState([]);
@@ -15,13 +17,12 @@ const PostsContainer = ({allPosts, setAllPosts}) => {
     async function fetchPosts() {
         try {
             const friendsPost = await Promise.all(friends.map((friend) => fetch(`${API}/users/${friend.id == id ? friend.friend_id : friend.id}/posts`, {
-                    headers: {
-                        'Authorization': token 
-                    }
-                })
+                headers: {
+                    'Authorization': token 
+                }
+            })
                 .then(res => res.json())
                 .then( res => { 
-                    console.log(res)
                     return res
                 })
             ));

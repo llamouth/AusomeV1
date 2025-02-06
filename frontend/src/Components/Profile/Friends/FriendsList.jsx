@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { IoIosRadioButtonOn } from "react-icons/io";
 import Friend from './Friend';
 import { Button } from 'react-bootstrap';
 import FriendshipPopUp from './FriendshipPopUp';
 import{ v4 as uuid} from 'uuid'
+import  { AllContext }  from '../../../Context/AllContext';
 
 
 const FriendsList = () => {
 
+    const { friends, setFriends } = useContext(AllContext)
     const { localStorage } = window;
     const { id } = useParams();
     const API = import.meta.env.VITE_BASE_URL;
     const token = localStorage.getItem('token');
     const userLoggedIn = localStorage.getItem('user_id');
-    const [friends, setFriends] = useState([]);
+    // const [friends, setFriends] = useState([]);
     const [commonFriend, setCommonFriend] = useState(false);
     const [showAll, setShowAll] = useState(false);
     const [handleFriendship, setHandleFriendship] = useState(false);
@@ -32,7 +34,7 @@ const FriendsList = () => {
     }, [id]);
 
     useEffect(() => {
-        const foundFriend = friends.find(friend => friend.id == userLoggedIn || friend.friend_id == userLoggedIn);
+        const foundFriend = friends?.find(friend => friend.id == userLoggedIn || friend.friend_id == userLoggedIn);
         if (foundFriend) {
             setCommonFriend(true);
         }else {
@@ -54,13 +56,13 @@ const FriendsList = () => {
 
             {/* Friends List */}
             <ul className="space-y-3 ">
-                {friends.slice(0, showAll ? friends.length : 4).map(friend => (
+                {friends?.slice(0, showAll ? friends?.length : 4).map(friend => (
                     <Friend key={friend?.uuid} friend={friend} />
                 ))}
             </ul>
 
             {/* View all/Show less button */}
-            {(friends.length > 4) && (
+            {(friends?.length > 4) && (
                 <Button variant="link" onClick={handleViewAll} className="text-blue-500 mt-3 block">
                     {showAll ? 'Show less friends' : 'View all friends'}
                 </Button>

@@ -1,22 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import ProfilePic from '../../assets/default-profile.jpg'
+import { AllContext } from '../../Context/AllContext';
 
 const ProfilePin = () => {
     
-    const { id } = useParams() 
-    const API = import.meta.env.VITE_BASE_URL;
-    const [user, setUser] = useState({});
-
-    useEffect(() => {
-        fetch(`${API}/users/${id}`)
-        .then( res => res.json())
-        .then( res => {
-            setUser(res)
-        })
-        .catch( err => console.error(err) );
-    }, [])
+    const {  user } = useContext(AllContext)
 
     return (
         <>

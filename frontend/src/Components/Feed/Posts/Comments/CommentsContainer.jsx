@@ -15,7 +15,7 @@ const CommentsContainer = ({ user_id, postId, setComments, comments, setShowComm
 
     return (
         <Card className="mt-3 border-top-0 relative">
-            <Button variant="outline-secondary" className="absolute top-0 right-0 m-2 p-0 rounded-full w-8 h-8 flex items-center justify-center" onClick={toggleVisibility}> &times; </Button>
+            <Button variant="outline-secondary" className="absolute top-0 right-0 m-2 p-0 border-none h-8 flex items-center justify-center" onClick={toggleVisibility}> Close </Button>
             <Card.Body className="p-0">
                 <h5 className="font-semibold mb-3 px-3 pt-3"> Comments</h5>
                 <NewComment user_id={user_id} postId={postId} setComments={setComments} />

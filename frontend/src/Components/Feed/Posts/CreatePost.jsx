@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Card, Form, Button, InputGroup } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { FaImage } from 'react-icons/fa';  
+import { AllContext } from '../../../Context/AllContext';
 
 const { localStorage } = window;
 
-const CreatePost = ({ setAllPosts }) => {
+const CreatePost = () => {
     const { id } = useParams();
+    const { setAllPosts} = useContext(AllContext)
     const API = import.meta.env.VITE_BASE_URL;
     const token = localStorage.getItem('token');
 

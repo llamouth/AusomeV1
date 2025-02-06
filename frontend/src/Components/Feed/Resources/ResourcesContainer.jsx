@@ -16,42 +16,33 @@ const ResourcesContainer = () => {
 
     
     useEffect(() => {
-
-        // const getRandomResource = () => {
-        //     if (resources.length > 0) {
-        //         const newRandomResource = resources[Math.floor(Math.random() * resources.length)]; 
-        //         return newRandomResource;
-        //     }
-        // }; 
-        // Fetch resources when component mounts or id changes
         fetch(`${API}/resources`)
             .then(res => res.json())
             .then(res => {
+                setResources(res);
+                const noDuplicateResources = [...res];
+                const newResourcesDisplayed = {};
                 const getRandomResource = () => {
-                    if (res.length > 0) {
-                        const newRandomResource = res[Math.floor(Math.random() * res.length)];
-                        const alreadyFoundResource = Object.values(resourcesDisplayed)
-                        // console.log(newRandomResource)
-                        // console.log(alreadyFoundResource)
-                        // if(alreadyFoundResource){
-                        //     return getRandomResource()
-                        // } 
+                    if (noDuplicateResources.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * noDuplicateResources.length);
+                        const newRandomResource = noDuplicateResources[randomIndex];
+                        noDuplicateResources.splice(randomIndex, 1);
                         return newRandomResource;
                     }
-                }; 
-                setResources(res);
-                Object.keys(resourcesDisplayed).map( key => {
-                    const newResource = getRandomResource()
-                    setResourcesDisplayed(prevState => { 
-                        return { ...prevState, [key] : newResource }
-                    })
-                })
+                    return null;
+                };
 
+                for (const key of Object.keys(resourcesDisplayed)) {
+                    const newResource = getRandomResource();
+                    if (newResource) {
+                        newResourcesDisplayed[key] = newResource;
+                    }
+                }
+
+                setResourcesDisplayed(newResourcesDisplayed);
             })
             .catch(err => console.error(err));
-
-            
-    }, [ ]);
+    }, []);
 
     useEffect(() => {
         

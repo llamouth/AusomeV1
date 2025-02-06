@@ -33,6 +33,7 @@ posts.post('/', async (req, res) => {
     if(newPost.id){
         res.status(200).json(newPost)
     }else {
+        console.log(newPost)
         res.status(500).json({ error: "Internal Server Error"})
     }
 })

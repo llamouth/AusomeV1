@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import ProfilePic from "../assets/default-profile.jpg";
+import FourOFour from '../Components/404/FourOFour'
 import { useParams } from 'react-router-dom';
+import { AllContext } from '../Context/AllContext';
 
 // COMPONENTS
 import FriendsList from '../Components/Profile/Friends/FriendsList';
@@ -10,34 +12,15 @@ import Posts from '../Components/Profile/Posts';
 const Profile = () => {
 
     const { id } = useParams();
-    const API = import.meta.env.VITE_BASE_URL;
-    const token = localStorage.getItem('token');
-    const userLoggedIn = localStorage.getItem('user_id')
-    const [user, setUser] = useState({});
-    const [posts, setPosts] = useState([]);
+    const { user, fetchUserProfile, posts} = useContext(AllContext)
 
     useEffect(() => {
-        fetch(`${API}/users/${id}`)
-        .then( res => res.json())
-        .then ( res => {
-            setUser(res);
-        })
-        .catch( err => console.error(err));
-
-        fetch(`${API}/users/${id}/posts`, {
-            headers: {
-                "Authorization": token
-            }
-        })
-        .then( res => res.json() )
-        .then( res => {
-            setPosts(res);
-        });
+        fetchUserProfile(id)
     }, [id]);
 
-    useEffect(() => {
-        // if(userLoggedIn)
-    }, [id])
+    if(user.error){
+        return <FourOFour/>
+    }
 
     return (
         <Container fluid className="h-full p-4">

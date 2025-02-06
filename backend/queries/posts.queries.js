@@ -21,8 +21,8 @@ const getSinglePost = async (user_id, id) => {
 
 const createNewPost = async (user_id, post) => {
     try {
-        const {content, image_url} = post
-        const newPost = await db.one('INSERT INTO posts (user_id, content, image_url) VALUES($1, $2, $3) RETURNING *', [user_id, content, image_url])
+        const {content, media} = post
+        const newPost = await db.one('INSERT INTO posts (user_id, content, media) VALUES($1, $2, $3) RETURNING *', [user_id, content, media])
         return newPost
     } catch (error) {
         return error
@@ -31,8 +31,8 @@ const createNewPost = async (user_id, post) => {
 
 const updatePost = async (user_id, post, id) => {
     try {
-        const {content, image_url} = post
-        const updatedPost = await db.one('UPDATE posts SET user_id=$1, content=$2, image_url=$3 WHERE id=$4 RETURNING *', [user_id, content, image_url, id])
+        const {content, media} = post
+        const updatedPost = await db.one('UPDATE posts SET user_id=$1, content=$2, media=$3 WHERE id=$4 RETURNING *', [user_id, content, media, id])
         return updatedPost
     } catch (error) {
         return error

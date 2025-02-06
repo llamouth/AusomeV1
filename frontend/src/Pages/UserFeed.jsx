@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import ProfilePin from '../Components/Feed/ProfilePin';
 import PostsContainer from '../Components/Feed/Posts/PostContainer';
@@ -6,11 +6,16 @@ import ResourcesContainer from '../Components/Feed/Resources/ResourcesContainer'
 import CreatePost from '../Components/Feed/Posts/CreatePost';
 import { useParams } from 'react-router-dom';
 import FourZeroFour from '../Components/404/FourOFour';
+import { AllContext } from '../Context/AllContext';
 
 const UserFeed = () => {
     const { id } = useParams(); 
     const user = localStorage.getItem('user_id');
-    const [allPosts, setAllPosts] = useState([]);
+    const { fetchUserProfile } = useContext(AllContext)
+
+    useEffect( () => {
+        fetchUserProfile(id)
+    }, [])
 
     if(id != user) {
         return <FourZeroFour/>
@@ -38,13 +43,12 @@ const UserFeed = () => {
 
                 {/* Center Feed */}
                 <Col md={6} className="d-flex flex-column mb-4 w-4/6">
-                    <CreatePost setAllPosts={setAllPosts}/>
-
+                    <CreatePost />
                     <Card className="shadow-lg rounded-lg flex-grow-1">
                         <Card.Body className="d-flex flex-column h-100">
                             <h5 className="text-center text-xl font-bold mb-4 font-roboto">Feed</h5>
                             <div className="flex-1 overflow-auto">
-                                <PostsContainer allPosts={allPosts} setAllPosts={setAllPosts}/>
+                                <PostsContainer/>
                             </div>
                         </Card.Body>
                     </Card>

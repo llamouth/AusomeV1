@@ -7,7 +7,6 @@ const { localStorage } = window
 
 const NewComment = ({ user_id, postId, setComments }) => {
 
-    const { id } = useParams()
     const userLoggedIn = JSON.parse(localStorage.getItem('user_id'))
     const [newComment, setNewComment] = useState({
         user_id: userLoggedIn,
