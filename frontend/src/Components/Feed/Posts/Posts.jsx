@@ -102,7 +102,7 @@ const Posts = ({ post, setAllPosts, setRun }) => {
                             <FaTimes size={20} />
                         </Button>
                     )}
-                    <div className="flex items-center mb-4 hover:cursor-pointer hover:animate-bounce" onClick={() => navigate(`/${user.id}/profile`)}>
+                    <div className="flex items-center mb-4 hover:cursor-pointer" onClick={() => navigate(`/${user.id}/profile`)}>
                         <img src={ProfilePic} alt={user.username} className="w-10 h-10 rounded-full mr-4" />
                         <div className='' >
                             <Card.Title className="mb-0 text-lg font-roboto" >
