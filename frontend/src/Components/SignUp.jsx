@@ -59,7 +59,7 @@ const SignUp = () => {
 
     return (
         <div className="flex justify-center items-center h-screen">
-            <div className={classNames("w-full max-w-md p-6 bg-white border border-gray-300 shadow-lg rounded-lg grid", { 'animate-shake': shake })}>
+            <div className="w-96  p-6 bg-white border border-gray-300 shadow-lg rounded-lg grid animate-shake" >
                 <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
                 <Form onSubmit={handleSubmit} className="space-y-4">
                     <Form.Group controlId="formFirstName">

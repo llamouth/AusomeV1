@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 
 const { localStorage } = window;
 
@@ -36,7 +38,7 @@ const Login = () => {
             if (res?.error) {
                 console.error(res);
             } else {
-                console.log(res)
+                console.log(res);
                 localStorage.setItem('token', res.token);
                 localStorage.setItem('user_id', res.user.id);
                 navigate(`/${res.user.id}/feed`);
@@ -54,34 +56,49 @@ const Login = () => {
 
     return (
         <div className="flex justify-center items-center h-screen">
-            <div className="w-full max-w-md p-6 bg-white border border-gray-300 shadow-lg rounded-lg">
+            <div className="w-full max-w-m p-6 bg-white border border-gray-300 shadow-lg rounded-lg">
                 <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-                <Form onSubmit={handleSubmit} className="space-y-4">
-                    <Form.Group controlId="formUsername">
-                        <Form.Control
+                
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Username Input */}
+                    <div className="space-y-2">
+                        <Label htmlFor="username">Username</Label>
+                        <Input
+                            id="username"
                             type="text"
-                            placeholder="Username"
+                            placeholder="Enter your username"
                             name="username"
                             value={current.username}
                             onChange={handleChange}
                             required
-                            className="rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                         />
-                    </Form.Group>
-                    <Form.Group controlId="formPassword">
-                        <Form.Control
+                    </div>
+
+                    {/* Password Input */}
+                    <div className="space-y-2">
+                        <Label htmlFor="password">Password</Label>
+                        <Input
+                            id="password"
                             type="password"
-                            placeholder="Password"
+                            placeholder="Enter your password"
                             name="password_hash"
                             value={current.password_hash}
                             onChange={handleChange}
                             required
-                            className="rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                         />
-                    </Form.Group>
-                    <Button type="submit" variant="primary" className="w-full">Log In</Button>
-                </Form>
-                <p className="mt-4 text-center text-blue-500 cursor-pointer" onClick={() => navigate('/signup')}>
+                    </div>
+
+                    {/* Login Button */}
+                    <Button type="submit" className="w-full">
+                        Log In
+                    </Button>
+                </form>
+
+                {/* Signup Redirect */}
+                <p 
+                    className="mt-4 text-center text-blue-500 cursor-pointer hover:underline" 
+                    onClick={() => navigate('/signup')}
+                >
                     SIGN UP
                 </p>
             </div>

@@ -9,79 +9,79 @@ import useEnterSubmit from "../../../../Hooks/useEnterSubmit";
 
 const Comment = ({ comment, user_id, postId, setComments }) => {
     
-    const { id } = useParams();
-    const token = window.localStorage.getItem("token");
-    const userLoggedIn = window.localStorage.getItem("user_id");
-    const API = import.meta.env.VITE_BASE_URL;
-    const textareaRef = useRef(null);
-    const [editComment, setEditComment] = useState(false);
-    const [user, setUser] = useState({});
-    const [editedComment, setEditedComment] = useState({
-        user_id: userLoggedIn,
-        content: comment.content,
-        post_id: postId,
-        created_at: comment.created_at,
-        updated_at: comment.updated_at,
+  const { id } = useParams();
+  const token = window.localStorage.getItem("token");
+  const userLoggedIn = window.localStorage.getItem("user_id");
+  const API = import.meta.env.VITE_BASE_URL;
+  const textareaRef = useRef(null);
+  const [editComment, setEditComment] = useState(false);
+  const [user, setUser] = useState({});
+  const [editedComment, setEditedComment] = useState({
+    user_id: userLoggedIn,
+    content: comment.content,
+    post_id: postId,
+    created_at: comment.created_at,
+    updated_at: comment.updated_at,
+  });
+    
+  const handleDelete = () => {
+    fetch(`${API}/users/${user_id}/posts/${postId}/comments/${comment.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      setComments((prevState) => {
+        return prevState.filter((comm) => comm.id !== comment.id);
+      });
     });
+  };
     
-    const handleDelete = () => {
-        fetch(`${API}/users/${user_id}/posts/${postId}/comments/${comment.id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: token,
-            },
-        })
-        .then((res) => res.json())
-        .then((res) => {
-            setComments((prevState) => {
-                return prevState.filter((comm) => comm.id !== comment.id);
-            });
-        });
-    };
+  const handleEditComment = () => {
+    setEditComment(!editComment);
+  };
     
-    const handleEditComment = (e) => {
-        setEditComment(!editComment);
-    };
-    
-    const handleUpdate = () => {
-        fetch(`${API}/users/${user_id}/posts/${postId}/comments/${comment.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: token,
-            },
-            body: JSON.stringify(editedComment),
-        })
-        .then((res) => res.json())
-        .then((updatedComment) => {
-            setComments((prevState) =>
-                prevState.map((comm) =>
-                    comm.id === updatedComment.id ? updatedComment : comm
+  const handleUpdate = () => {
+    fetch(`${API}/users/${user_id}/posts/${postId}/comments/${comment.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify(editedComment),
+    })
+    .then((res) => res.json())
+    .then((updatedComment) => {
+      setComments((prevState) =>
+        prevState.map((comm) =>
+          comm.id === updatedComment.id ? updatedComment : comm
         )
-    );
-    setEditComment(false);
-})
-.catch((err) => console.error(err));
-};
+      );
+      setEditComment(false);
+    })
+    .catch((err) => console.error(err));
+  };
 
 const handleEnterSubmit = useEnterSubmit(handleUpdate);
 
 
-useEffect(() => {
-if (textareaRef.current) {
-    textareaRef.current.style.height = "auto";
-    textareaRef.current.style.height =
-    textareaRef.current.scrollHeight + "px";
-}
-}, [editedComment.content]);
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height =
+      textareaRef.current.scrollHeight + "px";
+    }
+  }, [editedComment.content]);
 
-useEffect(() => {
+  useEffect(() => {
     fetch(`${API}/users/${comment.user_id}`)
     .then((res) => res.json())
     .then((res) => {
         setUser(res);
       })
-      .catch((err) => console.error(err));
+    .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -124,19 +124,19 @@ useEffect(() => {
                 <p className="text-gray-700">{comment.content}</p>
               </>
             ) : (
-                <>
-                    <textarea
-                        ref={textareaRef}
-                        className="w-full p-2 border rounded resize-none overflow-hidden"
-                        value={editedComment.content}
-                        onChange={(e) => setEditedComment({ ...editedComment, content: e.target.value })}
-                        onKeyDown={handleEnterSubmit}
-                        style={{ minHeight: '1 em' }}
-                    />
-                    <Button variant="primary" onClick={handleUpdate} className="mt-2">
-                        Save
-                    </Button>
-                </>            
+              <>
+                <textarea
+                  ref={textareaRef}
+                  className="w-full p-2 border rounded resize-none overflow-hidden"
+                  value={editedComment.content}
+                  onChange={(e) => setEditedComment({ ...editedComment, content: e.target.value })}
+                  onKeyDown={handleEnterSubmit}
+                  style={{ minHeight: '1 em' }}
+                />
+                <Button variant="primary" onClick={handleUpdate} className="mt-2">
+                  Save
+                </Button>
+              </>            
             )}
           </div>
         </div>

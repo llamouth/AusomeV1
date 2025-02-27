@@ -11,7 +11,6 @@ const FriendshipPopUp = ({ setHandleFriendship, commonFriend, setCommonFriend, s
     // Function to handle adding or removing a friend
     const handleFriendshipAction = () => {
         if (commonFriend) {
-            // Handle removing friend logic here
             fetch(`${API}/users/${userLoggedInId}/friends/remove`, {
                 method: 'DELETE',
                 body: JSON.stringify({friend_id: id}),
@@ -28,7 +27,6 @@ const FriendshipPopUp = ({ setHandleFriendship, commonFriend, setCommonFriend, s
                 setCommonFriend(false)
             })
         } else {
-            // Handle adding friend logic here
             fetch(`${API}/users/${userLoggedInId}/friends/request`, {
                 method: 'POST',
                 body: JSON.stringify({friend_id: id}),
@@ -47,13 +45,10 @@ const FriendshipPopUp = ({ setHandleFriendship, commonFriend, setCommonFriend, s
 
     return (
         <>
-            {/* Background overlay */}
             <div className='fixed top-0 left-0 w-full h-full bg-black opacity-50 z-999'></div> 
             
-            {/* Pop-up container */}
             <div className='fixed top-1/2 left-1/2 bg-white p-5 rounded-lg shadow-md z-1000 text-center -translate-x-1/2 -translate-y-1/2 w-80'>
                 
-                {/* Conditional message and action */}
                 {commonFriend ? 
                     <>
                         <p className="text-lg font-semibold mb-4">You are friends with this user.</p>
@@ -78,7 +73,6 @@ const FriendshipPopUp = ({ setHandleFriendship, commonFriend, setCommonFriend, s
                     </>
                 }
 
-                {/* Close button */}
                 <Button 
                     variant="secondary" 
                     onClick={() => setHandleFriendship(false)} 

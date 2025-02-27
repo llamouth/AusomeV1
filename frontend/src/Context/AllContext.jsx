@@ -10,7 +10,7 @@ export const AllProvider = ({ children }) => {
     const token = window.localStorage.getItem('token');
     
     const [friends, setFriends] = useState([])
-    const [ pendingRequests, setPendingRequests ] = useState([])
+    const [pendingRequests, setPendingRequests ] = useState([])
     const [user, setUser] = useState({});
     const [allPosts, setAllPosts] = useState([]);
     const [posts, setPosts] = useState([]);
@@ -43,7 +43,8 @@ export const AllProvider = ({ children }) => {
             setPendingRequests(res.filter( friend => friend.status === 'pending' && friend.id != userLoggedIn ).map(user => ({...user, uuid: uuid()}))) // In the database the friend.id is the user who sent the request so you should not be able to see the request you sent only the request sent to you
         })
         .catch( err => console.error( err ) )
-    }, [ user ])
+    }, [user])
+
 
     return (
         <AllContext.Provider

@@ -12,6 +12,7 @@ const PostsContainer = () => {
     const { id } = useParams();
     const token = localStorage.getItem('token');
     const [friends, setFriends] = useState([]);
+    const [showAll, setShowAll] = useState(false);
     const [run, setRun] = useState(false)
  
     async function fetchPosts() {

@@ -69,10 +69,10 @@ const Posts = ({ post, setAllPosts, setRun }) => {
             .catch(err => console.error(err));
 
         fetch(`${API}/users/${user_id}/posts/${postId}/likes`, {
-            headers: { 'Authorization': token}
+            headers: { 'Authorization': token }
         })
         .then( res => res.json() )
-        .then(res => {
+        .then( res => {
             const liked = res.find( like => like.user_id == id)
             if(liked){setLikedPost(true)}
             setLikes(res);
