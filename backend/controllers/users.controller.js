@@ -34,7 +34,7 @@ users.get("/:id", async (req, res) => {
 users.post("/", async (req, res) => {
     try {
         const newUser = await createUser(req.body)
-        const token = jwt.sign({ userId: newUser.user_id, username: newUser.username }, secret)
+        const token = jwt.sign({ userId: newUser.id, username: newUser.username }, secret, { expiresIn: "1d" })
         const user = { 
             user_id: newUser.id,
             username: newUser.username, 
@@ -55,7 +55,7 @@ users.post("/login", async (req, res) => {
             return 
         }
 
-        const token = jwt.sign({ userId: userLoggedIn.user_id, username: userLoggedIn.username }, secret);
+        const token = jwt.sign({ userId: userLoggedIn.user_id, username: userLoggedIn.username }, secret, { expiresIn: "1d" });
 
         const user = userLoggedIn
 

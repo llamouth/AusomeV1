@@ -1,6 +1,6 @@
 \c ausome_dev;
 
--- FUNCTIONS --
+
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -12,16 +12,16 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION remove_rejected_friend_request()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Check if the status is 'rejected'
+    
     IF NEW.status = 'rejected' THEN
-        -- Delete the friend request
+        
         DELETE FROM friends WHERE id = NEW.id;
     END IF;
-    RETURN NULL; -- Since the row is deleted, return NULL to avoid further processing.
+    RETURN NULL; 
 END;
 $$ LANGUAGE plpgsql;
 
--- TRIGGERS --
+
 CREATE TRIGGER update_users_updated_at
 BEFORE UPDATE ON users
 FOR EACH ROW
