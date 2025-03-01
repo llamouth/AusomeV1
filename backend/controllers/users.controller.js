@@ -21,6 +21,17 @@ users.get("/", async (req, res) => {
     }
 })
 
+users.get("/me", async (req, res) => {
+    try {
+        const user = await getSingleUser(req.user.userId); 
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 users.get("/:id", async (req, res) => {
     const { id } = req.params
     const singleUser = await getSingleUser(id)

@@ -7,11 +7,12 @@ const authenticateToken = (req, res, next) => {
     if(!token){
         return res.status(401).json({ "error": "Access Denied. No token provided" })
     }
-    jwt.verify(token, secret, (err, user) => {
-        if (err) return res.status(403).json({ error: 'Invalid token.' });
-        req.user = user;
+    jwt.verify(authHeader, process.env.SECRET, (err, decoded) => {
+        if (err) return res.status(403).json({ error: "Forbidden" });
+
+        req.user = decoded; 
         next();
-    })
+    });
 }
 
 module.exports = { authenticateToken }
